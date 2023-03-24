@@ -12,17 +12,17 @@ Feature toggles are configured in `yaml` file:
 ```yaml
 ---
 prod:
-  feature2:
-    active: true
+    feature2:
+        active: true
 stage:
-  feature1:
-    active: true
-    ref: r123
-    deadline: 2022-01-01
-  feature2:
-    active: true
-  feature3:
-    active: false
+    feature1:
+        active: true
+        ref: r123
+        deadline: 2022-01-01
+    feature2:
+        active: true
+    feature3:
+        active: false
 ```
 
 Structure:
