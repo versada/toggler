@@ -1,0 +1,83 @@
+---
+repos:
+  - repo: https://github.com/PyCQA/flake8
+    rev: 6.0.0
+    hooks:
+      - id: flake8
+        additional_dependencies: ["flake8-bugbear==23.2.13"]
+  - repo: https://github.com/myint/autoflake
+    rev: v2.0.1
+    hooks:
+      - id: autoflake
+        args:
+          - --expand-star-imports
+          - --ignore-init-module-imports
+          - --in-place
+          - --remove-all-unused-imports
+          - --remove-duplicate-keys
+          - --remove-unused-variables
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.3.1
+    hooks:
+      - id: pyupgrade
+        args:
+          - --keep-percent-format
+          - --py38-plus
+  - repo: https://github.com/pre-commit/pygrep-hooks
+    rev: v1.10.0
+    hooks:
+      - id: python-no-eval
+      - id: python-no-log-warn
+      - id: rst-backticks
+      - id: rst-directive-colons
+      - id: rst-inline-touching-normal
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.5
+    hooks:
+      - id: bandit
+        entry: bandit
+        language: python
+        language_version: python3
+        types: [python]
+        args:
+          # Make no sense that using assert is security issue.
+          - --skip=B101
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.29.0
+    hooks:
+      - id: yamllint
+        entry: yamllint
+        language: python
+        types: [file, yaml]
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: trailing-whitespace
+      - id: check-ast
+      - id: check-docstring-first
+      - id: check-executables-have-shebangs
+      - id: check-shebang-scripts-are-executable
+      - id: check-json
+      - id: check-xml
+      - id: check-yaml
+      - id: check-case-conflict
+      - id: check-merge-conflict
+        # exclude files where underlines are not distinguishable from merge
+        # conflicts
+        exclude: /README\.rst$|^docs/.*\.rst$
+      - id: check-symlinks
+      - id: debug-statements
+      # Fixers
+      - id: end-of-file-fixer
+      - id: fix-byte-order-marker
+      # To remove utf-8 encoding (and the like) in python files.
+      - id: fix-encoding-pragma
+        args: ["--remove"]
+      - id: mixed-line-ending
+        args: ["--fix=lf"]
+  - repo: https://github.com/psf/black
+    rev: 23.1.0
+    hooks:
+      - id: black
+        args:
+          - --config=.python-black
