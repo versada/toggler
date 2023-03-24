@@ -18,6 +18,7 @@ setup(
     name="toggler",
     use_scm_version=True,
     description="Feature Flags Manager",
+    long_description_content_type="text/markdown",
     long_description=readme,
     author="Versada (Andrius Laukavičius)",
     author_email="andrius.laukavicius@versada.eu",
