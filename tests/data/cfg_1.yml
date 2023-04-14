@@ -1,13 +1,12 @@
 ---
-prod:
-  feature2:
-    active: true
-stage:
-  feature1:
-    active: true
-    ref: r123
-    deadline: 2022-01-01
-  feature2:
-    active: true
-  feature3:
-    active: false
+feature1:
+  modes: [prod, stage]
+  date: 2023-01-01
+  days_to_expire: 10
+  ref: r123
+feature2:
+  modes: [stage]
+  date: 2023-01-01
+feature3:
+  modes: [other]
+  date: 2023-01-01
