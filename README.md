@@ -11,30 +11,30 @@ Feature toggles are configured in `yaml` file:
 
 ```yaml
 ---
-prod:
-  feature2:
-    active: true
-stage:
-  feature1:
-    active: true
-    ref: r123
-    deadline: 2022-01-01
-  feature2:
-    active: true
-  feature3:
-    active: false
+feature1:
+  modes: [prod, stage]
+  date: 2023-01-01
+  days_to_expire: 10
+  ref: r123
+feature2:
+  modes: [stage]
+  date: 2023-01-01
+feature3:
+  modes: [other]
+  date: 2023-01-01
 ```
 
 Structure:
 
-* modes (e.g prod, stage), defines features defined on specific mode.
+* modes (e.g prod, stage), defines features enabled on specific mode.
 * features (e.g feature1, feature2) are feature names used to identify which
   feature is used or not:
     - active: whether feature is enabled or not. If feature is not defined on
       specific mode, it is implicitly treated as disabled. This is the only required field.
     - ref: reference to feature or ticket (for convenience).
-    - deadline: if set, will check if feature flag has been for too long and logs
-      a warning if its passed a deadline.
+    - date: when feature flag was added.
+    - days_to_expire: how many days feature flag is to stay. Warning logs will
+      be written after deadline.
 
 ### Define mode and config file path
 
@@ -65,7 +65,7 @@ else:
 You can force toggle feature to make it easier to test.
 
 ```python
-from toggler.env import toggle_feature
+from toggler.services.env import toggle_feature
 
 
 def test_feature1_on():
